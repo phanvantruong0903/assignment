@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
-function CreateUser() {
+function EditCourse(props) {
+    const {title,id,desc, number_of_week, image,Start_date} = props
     const [show, setShow] = useState(false);
     const [Title, setTitle] = useState('');
     const [Description, setDescription] = useState('');
@@ -16,8 +17,8 @@ function CreateUser() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const createCourse = (title, desc, number_of_weeks, image, Start_date) => {
-        return axios.post("https://666287eb62966e20ef08eb3b.mockapi.io/Course", {
+    const editCourse = (title, desc, number_of_weeks, image, Start_date) => {
+        return axios.put(`https://666287eb62966e20ef08eb3b.mockapi.io/Course/${id}`, {
             title: title,
             desc: desc,
             number_of_weeks: number_of_weeks,
@@ -28,23 +29,23 @@ function CreateUser() {
     }
 
     const closeAdd = async () => {
-        let res = await createCourse(Title, Description, number_of_weeks, Image, date);
+        let res = await editCourse(Title, Description, number_of_weeks, Image, date);
         if (res) {
             handleClose();
         }
     }
     return (
         <>
-            <Button variant="success" onClick={handleShow}>
-                Create new Course
+            <Button variant="warning" className='mx-1' onClick={handleShow}>
+                Edit
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create new Course</Modal.Title>
+                    <Modal.Title>Edit {title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div><label>Title: </label> <br></br>
-                        <input type='text' placeholder='Title' style={{ marginBottom: "20px" }} value={Title} required="" onChange={(event) => {
+                        <input type='text' placeholder='Title' style={{ marginBottom: "20px" }} value={title} required="" onChange={(event) => {
                             setTitle(event.target.value)
                         }}></input> <br></br></div>
                     <label>Description: </label> <br></br>
@@ -60,7 +61,7 @@ function CreateUser() {
                         setImage(event.target.value)
                     }}></input><br></br>
                     <label>Start date: </label><br></br>
-                    <input type='date' placeholder='Start date' style={{ marginBottom: "20px" }} value={date} onChange={(event) => {
+                    <input type='date' placeholder='Start date' style={{ marginBottom: "20px" }} value={Start_date} onChange={(event) => {
                         setdate(event.target.value)
                     }}></input><br></br>
                 </Modal.Body>
@@ -69,7 +70,7 @@ function CreateUser() {
                         Close
                     </Button>
                     <Button variant="primary" onClick={closeAdd}>
-                        Create
+                        Save Changes
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -77,7 +78,7 @@ function CreateUser() {
     );
 }
 
-export default CreateUser;
+export default EditCourse;
 
 
 
