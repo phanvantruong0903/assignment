@@ -6,11 +6,11 @@ import axios from 'axios';
 function EditCourse(props) {
     const {title,id,desc, number_of_week, image,Start_date} = props
     const [show, setShow] = useState(false);
-    const [Title, setTitle] = useState('');
-    const [Description, setDescription] = useState('');
-    const [number_of_weeks, setnumber_of_weeks] = useState('');
-    const [Image, setImage] = useState('');
-    const [date, setdate] = useState('');
+    const [Title, setTitle] = useState(title);
+    const [Description, setDescription] = useState(desc);
+    const [number_of_weeks, setnumber_of_weeks] = useState(number_of_week);
+    const [Image, setImage] = useState(image);
+    const [date, setdate] = useState(Start_date);
 
 
 
@@ -41,11 +41,11 @@ function EditCourse(props) {
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit {title}</Modal.Title>
+                    <Modal.Title>Edit Details{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div><label>Title: </label> <br></br>
-                        <input type='text' placeholder='Title' style={{ marginBottom: "20px" }} value={title} required="" onChange={(event) => {
+                        <input type='text' placeholder='Title' style={{ marginBottom: "20px" }} value={Title} required="" onChange={(event) => {
                             setTitle(event.target.value)
                         }}></input> <br></br></div>
                     <label>Description: </label> <br></br>

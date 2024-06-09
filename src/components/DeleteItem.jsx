@@ -19,7 +19,6 @@ const DeleteCourse = (id)=>{
 const handleDelete = async()=>{
     let res =  await DeleteCourse(id)
     if(res){
-        console.log("hello world")
         handleClose();
     }
 }
@@ -36,7 +35,7 @@ const handleDelete = async()=>{
         <Modal.Header closeButton>
           <Modal.Title>Are you sure?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you want to delete {title} !</Modal.Body>
+        <Modal.Body>Do you want to delete {title} !</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
